@@ -7,7 +7,7 @@ public class Account extends Person {
 
 	}
 
-	public Account(String fName, String lName, String accountNumber) {
+	public Account(String accountNumber, String fName, String lName) {
 
 		super.firstName = fName;
 		super.lastName = lName;
@@ -20,6 +20,10 @@ public class Account extends Person {
 		super.firstName = name;
 
 		return "Name Changed";
+	}
+
+	public String getAccountNumber() {
+		return super.accountNumber;
 	}
 
 	public String getName() {
