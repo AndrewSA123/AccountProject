@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class AccountService {
 
-	Map<String, Account> accountMap = new HashMap<String, Account>();
+	private Map<String, Account> accountMap = new HashMap<String, Account>();
 
 	public Account getAccount(String accountNum) {
 
