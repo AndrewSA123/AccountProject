@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.qa.app.AccountService;
+import com.qa.service.AccountService;
 
 public class AccountTest {
 

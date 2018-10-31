@@ -1,10 +1,11 @@
-package com.qa.app;
+package com.qa.service;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qa.persistence.domain.Account;
 
 public class AccountService {
 
