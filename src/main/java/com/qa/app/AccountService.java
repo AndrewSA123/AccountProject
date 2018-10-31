@@ -34,5 +34,17 @@ public class AccountService {
 		return "Printing tables";
 	}
 
+	public int getAccountSum(String fName) {
+
+		int count = 0;
+
+		for (Account a : accountMap.values()) {
+			if (a.firstName.equals(fName)) {
+				count++;
+			}
+		}
+
+		return count;
+	}
 
 }

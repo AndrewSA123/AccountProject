@@ -1,5 +1,7 @@
 package accountapp;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 import com.qa.app.AccountService;
@@ -12,9 +14,9 @@ public class AccountTest {
 		AccountService ac = new AccountService();
 
 		ac.createAccount("1", "Andrew", "Knott");
-		ac.createAccount("1", "Gareth", "Clifford");
-		ac.createAccount("1", "Ben", "Taylor");
-		ac.createAccount("1", "Andrew", "Knott");
+		ac.createAccount("4", "Gareth", "Clifford");
+		ac.createAccount("3", "Ben", "Taylor");
+		ac.createAccount("2", "Andrew", "Knott");
 
 		
 		
