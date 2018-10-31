@@ -17,6 +17,8 @@ public class AccountService {
 		return accountMap.get(accountNum);
 	}
 
+
+
 	public String createAccount(String accountNum, String fName, String lName) {
 
 		Account newAccount = new Account(accountNum, fName, lName);
@@ -32,6 +34,21 @@ public class AccountService {
 		System.out.println(factory.writeValueAsString(accountMap.values()));
 
 		return "Printing tables";
+	}
+
+	public int getAccountSum(String fName) {
+
+		int count = 0;
+
+		for (Account a : accountMap.values()) {
+			if (a.firstName.equals(fName)) {
+				count++;
+			}
+		}
+		
+
+
+		return (int) accountMap.values().stream().filter(i -> i.getFirstName().equals(fName)).count();
 	}
 
 }
