@@ -1,6 +1,10 @@
 package com.qa.persistence.domain;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Account extends Person {
+
 
 
 	public Account() {
