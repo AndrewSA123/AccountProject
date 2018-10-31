@@ -17,6 +17,8 @@ public class AccountService {
 		return accountMap.get(accountNum);
 	}
 
+
+
 	public String createAccount(String accountNum, String fName, String lName) {
 
 		Account newAccount = new Account(accountNum, fName, lName);
@@ -43,8 +45,10 @@ public class AccountService {
 				count++;
 			}
 		}
+		
 
-		return count;
+
+		return (int) accountMap.values().stream().filter(i -> i.getFirstName().equals(fName)).count();
 	}
 
 }

@@ -22,6 +22,10 @@ public class Account extends Person {
 		return "Name Changed";
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
 	public String getAccountNumber() {
 		return super.accountNumber;
 	}
