@@ -34,8 +34,8 @@ public class Account {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "{\"First Name\": " + "\"" + this.firstName + "\"" + "," + "\n\"lastname\": " + "\"" + this.lastName
-				+ "\"" + "," + "\"" + "accountnumber\":" + "\"" + this.accountNumber + "\"" + "}";
+		return "{\"firstName\": " + "\"" + this.firstName + "\"" + "," + "\n\"lastName\": " + "\"" + this.lastName
+				+ "\"" + "," + "\"" + "accountNumber\":" + "\"" + this.accountNumber + "\"" + "}";
 	}
 
 	public Long getID() {
