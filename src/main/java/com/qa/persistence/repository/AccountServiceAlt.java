@@ -7,7 +7,6 @@ import java.util.HashMap;
 
 import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import com.qa.persistence.domain.Account;
@@ -17,7 +16,6 @@ import com.qa.util.JSONUtil;
 @Alternative
 public class AccountServiceAlt implements IConnect {
 
-	@PersistenceContext(unitName = "primary")
 	private JSONUtil util;
 	HashMap<Long, Account> accounts = new HashMap<>();
 
