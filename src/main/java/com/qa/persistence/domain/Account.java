@@ -31,6 +31,10 @@ public class Account {
 
 	}
 
+	public Long getID() {
+		return this.ID;
+	}
+
 
 	public String setFirstName(String name) {
 

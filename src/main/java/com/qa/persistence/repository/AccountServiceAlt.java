@@ -3,79 +3,59 @@ package com.qa.persistence.repository;
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
-import java.util.Collection;
+import java.util.HashMap;
 
-import javax.enterprise.inject.Default;
+import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import com.qa.persistence.domain.Account;
 import com.qa.util.JSONUtil;
 
 @Transactional(SUPPORTS)
-@Default
-public class AccountServiceDBImpl implements IConnect {
+@Alternative
+public class AccountServiceAlt implements IConnect {
 
 	@PersistenceContext(unitName = "primary")
-	private EntityManager manager;
 	private JSONUtil util;
+	HashMap<Long, Account> accounts = new HashMap<>();
 
 	@Inject
 	IdCheck BR;
 
-	@Override
 	@Transactional(REQUIRED)
 	public String createAccount(String account) {
 		Account acc = util.getObjectForJSON(account, Account.class);
-
-		if(BR.checkID(acc)) {
-			manager.persist(acc);
+		if (BR.checkID(acc)) {
+			accounts.put(acc.getID(), acc);
 			return "{\"message\": \"Account Successfully Added\"}";
 		}
+
 		return "{\"message\": \"This Account is Blocked\"}";
-
 	}
 
-
-	@Override
 	public Account findAccount(Long id) {
-		return manager.find(Account.class, id);
+		return accounts.get(id);
 	}
 
-
-	@Override
 	public String getAllAccounts() {
-		Query q = manager.createQuery("Select a FROM ACCOUNT a");
-		Collection<Account> accounts = (Collection<Account>) q.getResultList();
-		return util.getJSONForObject(accounts);
+		return accounts.values().toString();
 	}
 
-
-	@Override
 	@Transactional(REQUIRED)
 	public String deleteAccount(Long id) {
 		Account accountInDb = findAccount(id);
 		if (accountInDb != null) {
-			manager.remove(accountInDb);
+			accounts.remove(id);
 		}
 		return "{\"message\": \"Account sucessfully deleted\"}";
 	}
 
-
-	@Override
 	@Transactional(REQUIRED)
 	public String updateAccount(Account a, Long id) {
-		Account old = manager.find(Account.class, id);
-
-		old.setFirstName(a.getFirstName());
-		old.setLastName(a.getLastName());
-		old.setAccountNumber(a.getAccountNumber());
-
+		accounts.put(id, a);
 		return "{\"message\": \"Account sucessfully updated\"}";
-
 
 	}
 
