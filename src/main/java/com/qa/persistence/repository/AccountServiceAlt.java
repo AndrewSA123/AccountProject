@@ -1,18 +1,18 @@
 package com.qa.persistence.repository;
 
 import static javax.transaction.Transactional.TxType.REQUIRED;
-import static javax.transaction.Transactional.TxType.SUPPORTS;
 
 import java.util.HashMap;
 
 import javax.enterprise.inject.Alternative;
+import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import com.qa.persistence.domain.Account;
 import com.qa.util.JSONUtil;
 
-@Transactional(SUPPORTS)
+@ApplicationScoped
 @Alternative
 public class AccountServiceAlt implements IConnect {
 
@@ -51,8 +51,9 @@ public class AccountServiceAlt implements IConnect {
 	}
 
 	@Transactional(REQUIRED)
-	public String updateAccount(Account a, Long id) {
-		accounts.put(id, a);
+	public String updateAccount(String a, Long id) {
+		Account NewAccount = util.getObjectForJSON(a, Account.class);
+		accounts.put(id, NewAccount);
 		return "{\"message\": \"Account sucessfully updated\"}";
 
 	}
