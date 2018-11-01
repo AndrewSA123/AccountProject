@@ -1,9 +1,5 @@
 package com.qa.persistence.repository;
 
-import static javax.transaction.Transactional.TxType.REQUIRED;
-
-import javax.transaction.Transactional;
-
 import com.qa.persistence.domain.Account;
 
 public interface IConnect {
@@ -16,6 +12,6 @@ public interface IConnect {
 
 	String deleteAccount(Long id);
 
-	String updateAccount(Account a, Long id);
+	String updateAccount(String a, Long id);
 
 }

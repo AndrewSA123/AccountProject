@@ -21,6 +21,8 @@ public class AccountServiceDBImpl implements IConnect {
 
 	@PersistenceContext(unitName = "primary")
 	private EntityManager manager;
+
+	@Inject
 	private JSONUtil util;
 
 	@Inject
@@ -48,7 +50,7 @@ public class AccountServiceDBImpl implements IConnect {
 
 	@Override
 	public String getAllAccounts() {
-		Query q = manager.createQuery("Select a FROM ACCOUNT a");
+		Query q = manager.createQuery("Select a FROM Account a");
 		Collection<Account> accounts = (Collection<Account>) q.getResultList();
 		return util.getJSONForObject(accounts);
 	}
@@ -67,12 +69,13 @@ public class AccountServiceDBImpl implements IConnect {
 
 	@Override
 	@Transactional(REQUIRED)
-	public String updateAccount(Account a, Long id) {
+	public String updateAccount(String a, Long id) {
+		Account newAccount = util.getObjectForJSON(a, Account.class);
 		Account old = manager.find(Account.class, id);
 
-		old.setFirstName(a.getFirstName());
-		old.setLastName(a.getLastName());
-		old.setAccountNumber(a.getAccountNumber());
+		old.setFirstName(newAccount.getFirstName());
+		old.setLastName(newAccount.getLastName());
+		old.setAccountNumber(newAccount.getAccountNumber());
 
 		return "{\"message\": \"Account sucessfully updated\"}";
 

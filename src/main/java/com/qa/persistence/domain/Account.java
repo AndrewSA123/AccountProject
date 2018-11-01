@@ -31,6 +31,13 @@ public class Account {
 
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "{\"First Name\": " + "\"" + this.firstName + "\"" + "," + "\n\"lastname\": " + "\"" + this.lastName
+				+ "\"" + "," + "\"" + "accountnumber\":" + "\"" + this.accountNumber + "\"" + "}";
+	}
+
 	public Long getID() {
 		return this.ID;
 	}
