@@ -3,10 +3,10 @@ package com.qa.persistence.repository;
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
-import java.util.Collection;
 import java.util.HashMap;
 
 import javax.enterprise.inject.Alternative;
+import javax.inject.Inject;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
@@ -15,25 +15,32 @@ import com.qa.util.JSONUtil;
 
 @Transactional(SUPPORTS)
 @Alternative
-public class AccountServiceAlt {
+public class AccountServiceAlt implements IConnect {
 
 	@PersistenceContext(unitName = "primary")
 	private JSONUtil util;
 	HashMap<Long, Account> accounts = new HashMap<>();
 
+	@Inject
+	IdCheck BR;
+
 	@Transactional(REQUIRED)
 	public String createAccount(String account) {
 		Account acc = util.getObjectForJSON(account, Account.class);
-		accounts.put(acc.getID(), acc);
-		return "{\"message\": \"Accounth Successfully Added\"}";
+		if (BR.checkID(acc)) {
+			accounts.put(acc.getID(), acc);
+			return "{\"message\": \"Account Successfully Added\"}";
+		}
+
+		return "{\"message\": \"This Account is Blocked\"}";
 	}
 
 	public Account findAccount(Long id) {
 		return accounts.get(id);
 	}
 
-	public Collection<Account> getAllAccounts() {
-		return accounts.values();
+	public String getAllAccounts() {
+		return accounts.values().toString();
 	}
 
 	@Transactional(REQUIRED)
